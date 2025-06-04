@@ -10,6 +10,17 @@ Rails.application.routes.draw do
 
   # root "habits#all_habits"
 
+  resources :users do
+    collection do
+      post :signup
+      post :login
+      post :forgot_password
+      post :resend_code
+      post :verify_reset_code
+      post :reset_password
+    end
+  end
+
   resources :habits do
     collection do
       get :all_habits
