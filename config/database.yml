@@ -1,0 +1,24 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: postgres
+  password: myPassword
+
+development:
+  <<: *default
+  database: habit_tracker_consistently_development
+
+
+test:
+  <<: *default
+  database: habit_tracker_consistently_test
+
+
+production:
+  <<: *default
+  database: habit_tracker_consistently_production
+  username: habit_tracker_consistently
+  password: <%= ENV["HABIT_TRACKER_CONSISTENTLY_BE_DATABASE_PASSWORD"] %>
