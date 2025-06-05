@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
       return render json: { message: "Unauthorized User" }, status: :unauthorized unless decoded
 
       @current_user = User.find_by(id: decoded[:user_id])
-      render json: { message: "Unauthorized User" }, status: :unauthorized unless @current_user
+      return render json: { message: "Unauthorized User" }, status: :unauthorized unless @current_user
+      @current_user
     else
       render json: { message: "Unauthorized User" }, status: :unauthorized unless @current_user
     end

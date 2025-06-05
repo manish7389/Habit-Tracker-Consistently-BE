@@ -24,9 +24,10 @@ Rails.application.routes.draw do
   resources :habits do
     collection do
       get :all_habits
-      get :show_habits
-      post :create_habits
-      patch :update_habits
+      get :show_habit
+      post :create_habit
+      patch :update_habit
+      delete :delete_habit
     end
   end
 

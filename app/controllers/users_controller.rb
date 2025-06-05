@@ -72,14 +72,12 @@ class UsersController < ApplicationController
   end
 
   def reset_password
-    byebug
     return render json: { error: 'Token not present' }, status: :bad_request if params[:token].blank?
     return render json: { error: 'New password is required' }, status: :bad_request if params[:password].blank?
     return invalid_request('Password and confirm password does not match') unless passwords_match?
 
     user = find_user_by_token(params[:token])
     return render_invalid_link unless user
-    byebug
     if user.reset_password!(params[:password])
       render json: { status: 'Password reset successfully' }, status: :ok
     else
@@ -91,7 +89,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+    params.require(:user).permit(:email, :password, :first_name, :last_name)
   end
 
   def find_user_by_token(token)
